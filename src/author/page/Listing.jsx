@@ -1,32 +1,30 @@
-import { Box, Breadcrumbs, Typography } from "@mui/material"
 import React from "react"
 import { Link } from "react-router-dom"
-import List from '../component/List'
 
-import data from '../data'
+import { Box, Breadcrumbs, Typography } from "@mui/material"
+
+import List from "../component/List"
+import data from "../data"
 
 const AuthorListing = () => {
+  const [authors, setAuthors] = React.useState([])
 
-    const [authors, setAuthors] = React.useState([])
+  React.useEffect(() => {
+    setAuthors(data)
+  }, [setAuthors])
 
-    React.useEffect(() => {
-        setAuthors(data)
-    })
+  return (
+    <Box>
+      <Breadcrumbs mb={2} aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" to="/">
+          <Typography>Home</Typography>
+        </Link>
+        <Typography color="text.primary">Authors ({authors.length}) </Typography>
+      </Breadcrumbs>
 
-    return (
-        <Box>
-
-            <Breadcrumbs mb={2} aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" to="/">
-                    <Typography>Home</Typography>
-                </Link>
-                <Typography color="text.primary">Authors ({authors.length}) </Typography>
-            </Breadcrumbs>
-
-            <List authors={authors} />
-        </Box>
-    )
-
+      <List authors={authors} />
+    </Box>
+  )
 }
 
 export default AuthorListing

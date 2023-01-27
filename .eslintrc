@@ -1,0 +1,76 @@
+{
+  "parser": "@babel/eslint-parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [ "prettier", "import", "autofix", "simple-import-sort" ],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-sort-props": [ "off" ],
+    "react/no-typos": "error",
+    "react/no-unused-prop-types": "error",
+    "react/no-unused-state": "error",
+    "react/sort-prop-types": "error",
+    "react/jsx-boolean-value": "error",
+    "react/jsx-max-depth": [ "error", { "max": 10 } ],
+    "react/jsx-props-no-multi-spaces": "error",
+    "react/jsx-no-useless-fragment": [ "error", { "allowExpressions": true } ],
+    "react/jsx-curly-brace-presence": [ "error", { "props": "never", "children": "never", "propElementValues": "always" } ],
+    "react/function-component-definition": [ "error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" } ],
+    "react/jsx-closing-bracket-location": [ "error", { "selfClosing": "tag-aligned" } ],
+    "react/require-default-props": [ "error", { "functions": "defaultProps", "forbidDefaultForRequired": false } ],
+    "react/forbid-component-props": [ "error", { "forbid": [ "style", "className" ] } ],
+    "react/forbid-prop-types": [ "error", { "forbid": [ "any", "object", "array" ] } ]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": { }
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "PropTypes": false,
+    "React": false,
+    "jest/globals": true
+  },
+  "overrides": [
+    {
+      "files": [ "**/*.jsx", "**/*.js" ]
+    },
+    {
+      "files": [ "**/*.jsx", "**/*.js" ],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              [  "^react", "^prop-types", "^@?\\w", "^" ],
+              [ "@mui" ],
+              ["^\\."]
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}

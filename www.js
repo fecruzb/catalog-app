@@ -6,8 +6,8 @@ const port = 3000
 
 app.use(express.static("dist"))
 
-app.use("/*", (req, res) => res.sendFile("dist/index.html"))
+app.use("/*", (req, res) => res.sendFile(path.resolve("dist/index.html")))
 
 app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}`)
+  console.log(`Server started at http://localhost:${port}`)
 })

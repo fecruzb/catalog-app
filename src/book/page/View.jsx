@@ -1,37 +1,37 @@
 import React from "react"
-import { useParams, Link } from 'react-router-dom';
-import { Typography, Box, Breadcrumbs } from "@mui/material";
+import { Link, useParams } from "react-router-dom"
 
-import data from '../data'
-import Card from '../component/Card'
+import { Box, Breadcrumbs, Typography } from "@mui/material"
+
+import Card from "../component/Card"
+import data from "../data"
 
 const BookView = () => {
-    const { id } = useParams();
-    const [book, setBook] = React.useState(null)
+  const { id } = useParams()
+  const [book, setBook] = React.useState(null)
 
-    React.useEffect(() => {
-        const fetchedBook = data.find(e => e.id === parseInt(id))
-        setBook(fetchedBook)
-    })
+  React.useEffect(() => {
+    const fetchedBook = data.find((e) => e.id === parseInt(id))
+    setBook(fetchedBook)
+  }, [setBook, id])
 
+  return book ? (
+    <Box>
+      <Breadcrumbs mb={2} aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" to="/">
+          <Typography>Home</Typography>
+        </Link>
+        <Link underline="hover" color="inherit" to="/book">
+          <Typography>Books</Typography>
+        </Link>
+        <Typography color="text.primary">{book.title}</Typography>
+      </Breadcrumbs>
 
-    return book ?
-        <Box>
-
-            <Breadcrumbs mb={2} aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" to="/">
-                    <Typography>Home</Typography>
-                </Link>
-                <Link underline="hover" color="inherit" to="/book">
-                    <Typography>Books</Typography>
-                </Link>
-                <Typography color="text.primary">{book.title}</Typography>
-            </Breadcrumbs>
-
-            <Card book={book} />
-
-        </Box> : "Not Found"
+      <Card book={book} />
+    </Box>
+  ) : (
+    "Not Found"
+  )
 }
-
 
 export default BookView

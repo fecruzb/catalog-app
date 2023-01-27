@@ -1,33 +1,30 @@
-import { Box, Breadcrumbs, Typography } from "@mui/material"
 import React from "react"
 import { Link } from "react-router-dom"
-import List from '../component/List'
 
-import data from '../data'
+import { Box, Breadcrumbs, Typography } from "@mui/material"
+
+import List from "../component/List"
+import data from "../data"
 
 const BookListing = () => {
+  const [books, setBooks] = React.useState([])
 
-    const [books, setBooks] = React.useState([])
+  React.useEffect(() => {
+    setBooks(data)
+  }, [setBooks])
 
-    React.useEffect(() => {
-        setBooks(data)
-    })
+  return (
+    <Box>
+      <Breadcrumbs mb={2} aria-label="breadcrumb">
+        <Link underline="hover" color="inherit" to="/">
+          <Typography>Home</Typography>
+        </Link>
+        <Typography color="text.primary">Books ({books.length})</Typography>
+      </Breadcrumbs>
 
-    return (
-        <Box>
-
-            <Breadcrumbs mb={2} aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" to="/">
-                    <Typography>Home</Typography>
-                </Link>
-                <Typography color="text.primary">Books ({books.length})</Typography>
-            </Breadcrumbs>
-
-
-            <List books={books} />
-        </Box>
-    )
-
+      <List books={books} />
+    </Box>
+  )
 }
 
 export default BookListing
