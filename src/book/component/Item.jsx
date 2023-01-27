@@ -1,0 +1,31 @@
+import React from "react"
+import PropTypes from 'prop-types'
+import { Link } from "react-router-dom"
+import { Avatar, Grid, Typography, Box } from "@mui/material";
+
+const BookItem = ({ book }) => (
+    <Box bgcolor={"grey.100"} p={2}>
+        <Grid container spacing={2} alignItems="center">
+            <Grid item>
+                <Avatar variant="square" style={{ height: "80px", width: "64px" }} src={`https://robohash.org/${book.title}?set=set4&bgset=bg1`} />
+            </Grid>
+            <Grid item xs>
+                <Link to={`/book/${book.id}`}>
+                    <Typography variant="h6">{book.title}</Typography>
+                </Link>
+                <Typography>id: {book.id}</Typography>
+                <Typography>year: {book.year}</Typography>
+            </Grid>
+        </Grid>
+    </Box>
+)
+
+BookItem.propTypes = {
+    book: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+    }).isRequired
+}
+
+export default BookItem
