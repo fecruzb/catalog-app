@@ -3,16 +3,19 @@ import { Link, useParams } from "react-router-dom"
 
 import { Box, Breadcrumbs, Typography } from "@mui/material"
 
+import * as api from "../api"
 import Card from "../component/Card"
-import data from "../data"
 
 const BookView = () => {
   const { id } = useParams()
   const [book, setBook] = React.useState(null)
 
   React.useEffect(() => {
-    const fetchedBook = data.find((e) => e.id === parseInt(id))
-    setBook(fetchedBook)
+    const fetchData = async () => {
+      const result = await api.read(id)
+      setBook(result.data)
+    }
+    fetchData()
   }, [setBook, id])
 
   return book ? (

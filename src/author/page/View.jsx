@@ -3,16 +3,19 @@ import { Link, useParams } from "react-router-dom"
 
 import { Box, Breadcrumbs, Typography } from "@mui/material"
 
+import * as api from "../api"
 import Card from "../component/Card"
-import data from "../data"
 
 const Authoriew = () => {
   const { id } = useParams()
   const [author, setAuthor] = React.useState(null)
 
   React.useEffect(() => {
-    const fetchedAuthor = data.find((e) => e.id === parseInt(id))
-    setAuthor(fetchedAuthor)
+    const fetchData = async () => {
+      const result = await api.read(id)
+      setAuthor(result.data)
+    }
+    fetchData()
   }, [setAuthor, id])
 
   return author ? (

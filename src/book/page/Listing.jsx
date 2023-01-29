@@ -3,14 +3,18 @@ import { Link } from "react-router-dom"
 
 import { Box, Breadcrumbs, Typography } from "@mui/material"
 
+import * as api from "../api"
 import List from "../component/List"
-import data from "../data"
 
 const BookListing = () => {
   const [books, setBooks] = React.useState([])
 
   React.useEffect(() => {
-    setBooks(data)
+    const fetchData = async () => {
+      const result = await api.list()
+      setBooks(result.data)
+    }
+    fetchData()
   }, [setBooks])
 
   return (
