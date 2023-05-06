@@ -30,7 +30,7 @@ const AuthorEdit = () => {
 
   const handleSubmit = async (value) => {
     const { data: author } = await AuthorAPI.update(value)
-    navigate(`/author/${author.id}`)
+    navigate(`/author`)
     return author
   }
 

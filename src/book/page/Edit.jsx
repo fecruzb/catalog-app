@@ -30,7 +30,7 @@ const BookEdit = () => {
 
   const handleSubmit = async (value) => {
     const { data: book } = await BookAPI.update(value)
-    navigate(`/book/${book.id}`)
+    navigate(`/book`)
     return book
   }
 
@@ -50,7 +50,7 @@ const BookEdit = () => {
                 <Typography>Book</Typography>
               </Link>,
               <Link to={`/book/${book.id}`} key="2">
-                <Typography>{book.name}</Typography>
+                <Typography>{book.title}</Typography>
               </Link>,
             ]}
           >

@@ -7,6 +7,15 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "@fontsource/nunito-sans/index.css"
 
 const theme = createTheme({
+  palette: {
+    type: "light",
+    primary: {
+      main: "#49376b",
+    },
+    secondary: {
+      main: "#28a8a1",
+    },
+  },
   typography: {
     fontFamily: "Nunito Sans",
     fontSize: 14,

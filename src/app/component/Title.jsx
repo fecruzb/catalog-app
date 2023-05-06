@@ -2,16 +2,20 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { Box, Breadcrumbs, Divider, Grid, Typography } from "@mui/material"
+import HomeIcon from "@mui/icons-material/Home"
 
 import Link from "./Link"
 
 const Title = ({ children, action, breadcrumb }) => (
-  <Box mb={2}>
+  <Box mb={1}>
     <Grid container spacing={2} alignItems="flex-end" mb={1} height="54px">
       <Grid item xs>
-        <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs separator="›">
           <Link to="/">
-            <Typography>Home</Typography>
+            <Typography sx={{ display: "flex", alignItems: "center" }}>
+              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Home
+            </Typography>
           </Link>
           {breadcrumb}
           <Typography color="text.primary">{children}</Typography>

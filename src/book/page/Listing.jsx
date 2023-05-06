@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { Box, Button } from "@mui/material"
+import NoteAddIcon from "@mui/icons-material/NoteAdd"
 
 import { Title } from "@/app/component"
 import * as BookAPI from "@/book/api"
@@ -37,8 +38,14 @@ const BookListing = () => {
     <Box>
       <Title
         action={
-          <Button onClick={() => navigate("/book/new")} variant="contained">
-            New
+          <Button
+            sx={{ fontWeight: "bold", textTransform: "none" }}
+            onClick={() => navigate("/book/new")}
+            variant="contained"
+            color="primary"
+          >
+            <NoteAddIcon sx={{ mr: 1 }} />
+            New Book
           </Button>
         }
       >

@@ -1,12 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { Avatar, Box, ButtonBase, Grid, IconButton, Stack, Typography } from "@mui/material"
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
-import EditIcon from "@mui/icons-material/Edit"
+import { Avatar, Box, Button, ButtonBase, Grid, Stack, Typography } from "@mui/material"
 
 const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
-  <Box bgcolor="grey.100" p={2}>
+  <Box>
     <Grid container spacing={2} alignItems="center">
       <Grid item>
         <ButtonBase onClick={onView}>
@@ -27,24 +25,14 @@ const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
         <Grid item>
           <Stack direction="row" spacing={1}>
             {onEdit && (
-              <IconButton
-                sx={{ borderWidth: "1px", borderStyle: "dotted" }}
-                size="large"
-                onClick={onEdit}
-                color="warning"
-              >
-                <EditIcon />
-              </IconButton>
+              <Button variant="outlined" color="warning" size="small" onClick={onEdit}>
+                Edit
+              </Button>
             )}
             {onDelete && (
-              <IconButton
-                sx={{ borderWidth: "1px", borderStyle: "dashed" }}
-                size="large"
-                onClick={onDelete}
-                color="error"
-              >
-                <DeleteForeverIcon />
-              </IconButton>
+              <Button variant="outlined" color="error" size="small" onClick={onDelete}>
+                Delete
+              </Button>
             )}
           </Stack>
         </Grid>

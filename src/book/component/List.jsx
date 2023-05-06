@@ -15,7 +15,7 @@ const BookList = ({ books, onDelete, onEdit, onView }) => (
           onDelete={() => onDelete(book)}
           onView={() => onView(book)}
         />
-        <Divider />
+        <Divider sx={{ mt: 1 }} />
       </Grid>
     ))}
   </Grid>

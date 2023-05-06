@@ -6,16 +6,16 @@ import { Divider, Grid } from "@mui/material"
 import Item from "./Item"
 
 const AuthorList = ({ authors, onEdit, onDelete, onView }) => (
-  <Grid container spacing={2}>
+  <Grid container spacing={2} direction="column">
     {authors.map((author) => (
-      <Grid item key={author.id} xs={12}>
+      <Grid item key={author.id} xs>
         <Item
           author={author}
           onEdit={() => onEdit(author)}
           onDelete={() => onDelete(author)}
           onView={() => onView(author)}
         />
-        <Divider />
+        <Divider sx={{ mt: 1 }} />
       </Grid>
     ))}
   </Grid>

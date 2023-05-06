@@ -12,7 +12,7 @@ const BookCreate = () => {
 
   const handleSubmit = async (value) => {
     const { data: book } = await BookAPI.create(value)
-    navigate(`/book/${book.id}`)
+    navigate(`/book`)
     return book
   }
 

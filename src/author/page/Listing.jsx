@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { Box, Button } from "@mui/material"
+import PersonAddIcon from "@mui/icons-material/PersonAdd"
 
 import { Title } from "@/app/component"
 import * as AuthorAPI from "@/author/api"
@@ -37,8 +38,14 @@ const AuthorListing = () => {
     <Box>
       <Title
         action={
-          <Button onClick={() => navigate("/author/new")} variant="contained" color="success">
-            New
+          <Button
+            sx={{ fontWeight: "bold", textTransform: "none" }}
+            onClick={() => navigate("/author/new")}
+            variant="contained"
+            color="primary"
+          >
+            <PersonAddIcon sx={{ mr: 1 }} />
+            New Author
           </Button>
         }
       >
