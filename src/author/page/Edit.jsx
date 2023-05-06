@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-import { Box, Button, Stack, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 
 import { Link, Loading, NotFound, Title } from "@/app/component"
 import * as AuthorAPI from "@/author/api"
-import { Card } from "@/author/component"
+import { Upsert } from "@/author/form"
 
-const AuthorView = () => {
+const AuthorEdit = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [author, setAuthor] = useState(null)
@@ -28,7 +28,15 @@ const AuthorView = () => {
     fetchAuthor(id)
   }, [id])
 
-  const handleEdit = () => navigate(`/author/${author.id}/edit`)
+  const handleSubmit = async (value) => {
+    const { data: author } = await AuthorAPI.update(value)
+    navigate(`/author/${author.id}`)
+    return author
+  }
+
+  const handleCancel = () => {
+    navigate("/author")
+  }
 
   return (
     <Box>
@@ -37,22 +45,18 @@ const AuthorView = () => {
       ) : author ? (
         <>
           <Title
-            breadcrumb={
-              <Link to="/author">
+            breadcrumb={[
+              <Link to="/author" key="1">
                 <Typography>Authors</Typography>
-              </Link>
-            }
-            action={
-              <Stack direction="row" spacing={1}>
-                <Button onClick={handleEdit} variant="outlined" color="warning">
-                  Edit
-                </Button>
-              </Stack>
-            }
+              </Link>,
+              <Link to={`/author/${author.id}`} key="2">
+                <Typography>{author.name}</Typography>
+              </Link>,
+            ]}
           >
-            {author.name}
+            Edit
           </Title>
-          <Card author={author} />
+          <Upsert initialValues={author} onSubmit={handleSubmit} onCancel={handleCancel} />
         </>
       ) : (
         <NotFound>Author was not found.</NotFound>
@@ -61,4 +65,4 @@ const AuthorView = () => {
   )
 }
 
-export default AuthorView
+export default AuthorEdit

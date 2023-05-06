@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
 import { Avatar, Box, Grid, Typography } from "@mui/material"
@@ -14,9 +13,7 @@ const AuthorCard = ({ author }) => (
         />
       </Grid>
       <Grid item xs>
-        <Link to={`/author/${author.id}`}>
-          <Typography variant="h6">{author.name}</Typography>
-        </Link>
+        <Typography variant="h6">{author.name}</Typography>
         <Typography>id: {author.id}</Typography>
         <Typography>country: {author.country}</Typography>
       </Grid>

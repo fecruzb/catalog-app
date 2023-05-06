@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-import { Box, Button, Stack, Typography } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 
 import { Link, Loading, NotFound, Title } from "@/app/component"
 import * as BookAPI from "@/book/api"
-import { Card } from "@/book/component"
+import { Upsert } from "@/book/form"
 
-const BookView = () => {
+const BookEdit = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [book, setBook] = useState(null)
@@ -28,7 +28,15 @@ const BookView = () => {
     fetchBook(id)
   }, [id])
 
-  const handleEdit = () => navigate(`/book/${book.id}/edit`)
+  const handleSubmit = async (value) => {
+    const { data: book } = await BookAPI.update(value)
+    navigate(`/book/${book.id}`)
+    return book
+  }
+
+  const handleCancel = () => {
+    navigate("/book")
+  }
 
   return (
     <Box>
@@ -37,22 +45,18 @@ const BookView = () => {
       ) : book ? (
         <>
           <Title
-            breadcrumb={
-              <Link to="/book">
+            breadcrumb={[
+              <Link to="/book" key="1">
                 <Typography>Book</Typography>
-              </Link>
-            }
-            action={
-              <Stack direction="row" spacing={1}>
-                <Button onClick={handleEdit} variant="outlined" color="warning">
-                  Edit
-                </Button>
-              </Stack>
-            }
+              </Link>,
+              <Link to={`/book/${book.id}`} key="2">
+                <Typography>{book.name}</Typography>
+              </Link>,
+            ]}
           >
-            {book.title}
+            Edit
           </Title>
-          <Card book={book} />
+          <Upsert initialValues={book} onSubmit={handleSubmit} onCancel={handleCancel} />
         </>
       ) : (
         <NotFound>Book was not found.</NotFound>
@@ -61,4 +65,4 @@ const BookView = () => {
   )
 }
 
-export default BookView
+export default BookEdit

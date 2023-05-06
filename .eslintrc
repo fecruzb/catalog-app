@@ -59,8 +59,11 @@
           "error",
           {
             "groups": [
-              [  "^react", "^prop-types", "^@?\\w", "^" ],
-              [ "@mui" ],
+              [  "^react", "^prop-types" ],
+              [ "yup", "^formik"],
+              [ "@mui/material", "@mui/icons-material" ],
+              [ "^@?\\w" ],
+              [ "^"],
               ["^\\."]
             ]
           }

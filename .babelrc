@@ -2,5 +2,20 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [ "./" ],
+        "extensions": [ ".js", ".jsx" ],
+        "alias": {
+          "@/app": "./src/app",
+          "@/book": "./src/book",
+          "@/author": "./src/author",
+          "@/home": "./src/home"
+        }
+      }
     ]
+  ]
 }

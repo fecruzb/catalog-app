@@ -1,11 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { Box, Container } from "@mui/material"
+import { Box } from "@mui/material"
+
+import Container from "./Container"
 
 const Page = ({ children }) => (
-  <Box py={3}>
-    <Container maxWidth="100%">{children}</Container>
+  <Box py={2}>
+    <Container>{children}</Container>
   </Box>
 )
 Page.propTypes = {

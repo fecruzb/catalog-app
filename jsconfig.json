@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "jsx": "react",
+        "baseUrl": "./",
+        "module": "commonjs",
+        "paths": {
+            "@/app/*": [
+                "src/app/*"
+            ],
+            "@/author/*": [
+                "src/author/*"
+            ],
+            "@/book/*": [
+                "src/book/*"
+            ],
+            "@/home/*": [
+                "src/home/*"
+            ],
+        }
+    },
+}

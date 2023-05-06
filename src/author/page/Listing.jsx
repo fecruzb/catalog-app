@@ -1,32 +1,50 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { Box, Breadcrumbs, Typography } from "@mui/material"
+import { Box, Button } from "@mui/material"
 
-import * as api from "../api"
-import List from "../component/List"
+import { Title } from "@/app/component"
+import * as AuthorAPI from "@/author/api"
+import { List } from "@/author/component"
 
 const AuthorListing = () => {
-  const [authors, setAuthors] = React.useState([])
+  const navigate = useNavigate()
+  const [authors, setAuthors] = useState([])
 
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const result = await api.list()
-      setAuthors(result.data)
-    }
+  const fetchData = async () => {
+    const result = await AuthorAPI.list()
+    setAuthors(result.data)
+  }
+
+  useEffect(() => {
     fetchData()
-  }, [setAuthors])
+  }, [])
+
+  const handleEdit = async (author) => {
+    navigate(`/author/${author.id}/edit`)
+  }
+
+  const handleView = async (author) => {
+    navigate(`/author/${author.id}`)
+  }
+
+  const handleDelete = async (author) => {
+    await AuthorAPI.remove(author.id)
+    fetchData()
+  }
 
   return (
     <Box>
-      <Breadcrumbs mb={2} aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" to="/">
-          <Typography>Home</Typography>
-        </Link>
-        <Typography color="text.primary">Authors ({authors.length}) </Typography>
-      </Breadcrumbs>
-
-      <List authors={authors} />
+      <Title
+        action={
+          <Button onClick={() => navigate("/author/new")} variant="contained" color="success">
+            New
+          </Button>
+        }
+      >
+        Author
+      </Title>
+      <List authors={authors} onDelete={handleDelete} onEdit={handleEdit} onView={handleView} />
     </Box>
   )
 }
