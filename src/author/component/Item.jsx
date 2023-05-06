@@ -19,7 +19,7 @@ const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
         </ButtonBase>
       </Grid>
       <Grid item xs>
-        <Link to={`/book/${author.id}`}>
+        <Link to={`/author/${author.id}`}>
           <Typography variant="h6" color="secondary">
             {author.name}
           </Typography>
