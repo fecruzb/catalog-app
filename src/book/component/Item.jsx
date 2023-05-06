@@ -5,9 +5,11 @@ import { Avatar, Box, ButtonBase, Grid, IconButton, Stack, Typography } from "@m
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
 import EditIcon from "@mui/icons-material/Edit"
 
+import { Link } from "@/app/component"
+
 const BookItem = ({ book, onDelete, onEdit, onView }) => (
   <Box p={2}>
-    <Grid container spacing={2} alignItems="center">
+    <Grid container spacing={2} alignItems="center" direction="row">
       <Grid item>
         <ButtonBase onClick={onView}>
           <Avatar
@@ -18,11 +20,21 @@ const BookItem = ({ book, onDelete, onEdit, onView }) => (
         </ButtonBase>
       </Grid>
       <Grid item xs>
-        <Typography variant="h6">{book.title}</Typography>
-        <Typography>ID: {book.id}</Typography>
+        <Link to={`/book/${book.id}`}>
+          <Typography variant="h6" color="secondary">
+            {book.title}
+          </Typography>
+        </Link>
+        {book?.author && (
+          <Link to={`/author/${book.author.id}`} color="primary">
+            <Typography color="primary" variant="subtitle1">
+              {book.author?.name}
+            </Typography>
+          </Link>
+        )}
+
         <Typography>Year: {book.year}</Typography>
         <Typography>ISBN: {book.ISBN}</Typography>
-        <Typography>Author: {book.author?.name}</Typography>
       </Grid>
       {(onEdit || onDelete) && (
         <Grid item>

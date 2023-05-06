@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-import { Box, Button, Stack, Typography } from "@mui/material"
+import { Box, Button, Divider, Stack, Typography } from "@mui/material"
 
 import { Link, Loading, NotFound, Title } from "@/app/component"
 import * as AuthorAPI from "@/author/api"
 import { Card } from "@/author/component"
+import { List } from "@/book/component"
 
 const AuthorView = () => {
   const navigate = useNavigate()
@@ -53,6 +54,11 @@ const AuthorView = () => {
             {author.name}
           </Title>
           <Card author={author} />
+
+          <Typography variant="h6">Books</Typography>
+          <Divider sx={{ mb: 1 }} />
+
+          <List books={author?.books || []} actions={false} />
         </>
       ) : (
         <NotFound>Author was not found.</NotFound>

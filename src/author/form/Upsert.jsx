@@ -4,18 +4,21 @@ import PropTypes from "prop-types"
 import * as yup from "yup"
 import { Field, Form, Formik } from "formik"
 
-import { Button, Grid, MenuItem, Stack, TextField } from "@mui/material"
+import { Autocomplete, Box, Button, Grid, Stack, TextField } from "@mui/material"
+
+import countryData from "country-list"
+
+import { Flag } from "../component"
 
 const validationSchema = yup.object().shape({
   name: yup.string().required("Name is required"),
   country: yup.string().required("Country is required"),
 })
 
-const countries = [
-  { id: 1, name: "Country 1" },
-  { id: 2, name: "Country 2" },
-  { id: 3, name: "Country 3" },
-]
+const countries = countryData.getData().map((country) => ({
+  code: country.code,
+  label: country.name,
+}))
 
 const UpsertAuthorForm = ({ initialValues, onSubmit, onCancel }) => (
   <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -33,20 +36,33 @@ const UpsertAuthorForm = ({ initialValues, onSubmit, onCancel }) => (
             />
           </Grid>
           <Grid item xs={12}>
-            <Field
-              name="country"
-              as={TextField}
-              label="Country"
-              fullWidth
-              select
-              error={touched.country && !!errors.country}
-              helperText={touched.country && errors.country}
-            >
-              {countries.map((country) => (
-                <MenuItem key={country.id} value={country.name}>
-                  {country.name}
-                </MenuItem>
-              ))}
+            <Field name="country">
+              {({ field }) => (
+                <Autocomplete
+                  value={countries.find((o) => o.code === field.value)}
+                  onChange={(event, value) =>
+                    field.onChange({ target: { name: "country", value: value.code } })
+                  }
+                  options={countries}
+                  autoHighlight
+                  getOptionLabel={(option) => option.label}
+                  renderOption={(props, option) => (
+                    <Box component="li" sx={{ "& > img": { mr: 2, flexShrink: 0 } }} {...props}>
+                      <Flag code={option.code} />
+                      {option.label} ({option.code})
+                    </Box>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Country"
+                      fullWidth
+                      error={touched.country && !!errors.country}
+                      helperText={touched.country && errors.country}
+                    />
+                  )}
+                />
+              )}
             </Field>
           </Grid>
           <Grid item xs={12}>

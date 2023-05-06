@@ -3,6 +3,10 @@ import PropTypes from "prop-types"
 
 import { Avatar, Box, Button, ButtonBase, Grid, Stack, Typography } from "@mui/material"
 
+import { Link } from "@/app/component"
+
+import Flag from "./Flag"
+
 const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
   <Box>
     <Grid container spacing={2} alignItems="center">
@@ -15,11 +19,14 @@ const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
         </ButtonBase>
       </Grid>
       <Grid item xs>
-        <Typography variant="h6" fontWeight="bold">
-          {author.name}
+        <Link to={`/book/${author.id}`}>
+          <Typography variant="h6" color="secondary">
+            {author.name}
+          </Typography>
+        </Link>
+        <Typography>
+          <Flag code={author.country} />
         </Typography>
-        <Typography>id: {author.id}</Typography>
-        <Typography>country: {author.country}</Typography>
       </Grid>
       {(onEdit || onDelete) && (
         <Grid item>
