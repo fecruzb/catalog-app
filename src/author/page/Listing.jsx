@@ -8,13 +8,22 @@ import { Title } from "@/app/component"
 import * as AuthorAPI from "@/author/api"
 import { List } from "@/author/component"
 
+import { Delete } from "../modal"
+
 const AuthorListing = () => {
   const navigate = useNavigate()
   const [authors, setAuthors] = useState([])
+  const [authorToDelete, setAuthorToDelete] = useState(false)
 
   const fetchData = async () => {
     const result = await AuthorAPI.list()
     setAuthors(result.data)
+  }
+
+  const deleteData = async (author) => {
+    await AuthorAPI.remove(author.id)
+    await fetchData()
+    handleCloseModal()
   }
 
   useEffect(() => {
@@ -29,13 +38,19 @@ const AuthorListing = () => {
     navigate(`/author/${author.id}`)
   }
 
-  const handleDelete = async (author) => {
-    await AuthorAPI.remove(author.id)
-    fetchData()
+  const handleOpenModal = (author) => {
+    setAuthorToDelete(author)
+  }
+
+  const handleCloseModal = () => {
+    setAuthorToDelete(false)
   }
 
   return (
     <Box>
+      {authorToDelete && (
+        <Delete open author={authorToDelete} onClose={handleCloseModal} onConfirm={deleteData} />
+      )}
       <Title
         action={
           <Button
@@ -51,7 +66,7 @@ const AuthorListing = () => {
       >
         Author
       </Title>
-      <List authors={authors} onDelete={handleDelete} onEdit={handleEdit} onView={handleView} />
+      <List authors={authors} onDelete={handleOpenModal} onEdit={handleEdit} onView={handleView} />
     </Box>
   )
 }

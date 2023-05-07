@@ -26,9 +26,11 @@ BookList.defaultProps = {
   onDelete: undefined,
   onEdit: undefined,
   onView: undefined,
+  actions: true,
 }
 
 BookList.propTypes = {
+  actions: PropTypes.bool,
   books: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

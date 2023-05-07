@@ -8,13 +8,22 @@ import { Title } from "@/app/component"
 import * as BookAPI from "@/book/api"
 import { List } from "@/book/component"
 
+import { Delete } from "../modal"
+
 const BookListing = () => {
   const navigate = useNavigate()
   const [books, setBooks] = useState([])
+  const [bookToDelete, setBookToDelete] = useState(false)
 
   const fetchData = async () => {
     const result = await BookAPI.list()
     setBooks(result.data)
+  }
+
+  const deleteData = async (book) => {
+    await BookAPI.remove(book.id)
+    await fetchData()
+    handleCloseModal()
   }
 
   useEffect(() => {
@@ -29,13 +38,19 @@ const BookListing = () => {
     navigate(`/book/${book.id}`)
   }
 
-  const handleDelete = async (book) => {
-    await BookAPI.remove(book.id)
-    fetchData()
+  const handleOpenModal = (book) => {
+    setBookToDelete(book)
+  }
+
+  const handleCloseModal = () => {
+    setBookToDelete(false)
   }
 
   return (
     <Box>
+      {bookToDelete && (
+        <Delete open book={bookToDelete} onClose={handleCloseModal} onConfirm={deleteData} />
+      )}
       <Title
         action={
           <Button
@@ -51,7 +66,7 @@ const BookListing = () => {
       >
         Book
       </Title>
-      <List books={books} onDelete={handleDelete} onEdit={handleEdit} onView={handleView} />
+      <List books={books} onDelete={handleOpenModal} onEdit={handleEdit} onView={handleView} />
     </Box>
   )
 }
