@@ -12,7 +12,7 @@ const BookCard = ({ book }) => (
         <Avatar
           variant="square"
           sx={{ height: "128px", width: "128px" }}
-          src={`https://robohash.org/${book.title}?set=set4&bgset=bg1`}
+          src={`data:image/png;base64,${book.cover}`}
         />
       </Grid>
       <Grid item xs>

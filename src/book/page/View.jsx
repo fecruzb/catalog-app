@@ -53,6 +53,9 @@ const BookView = () => {
             {book.title}
           </Title>
           <Card book={book} />
+          <Box mt={2} mb={2}>
+            <Typography>{book.description}</Typography>
+          </Box>
         </>
       ) : (
         <NotFound>Book was not found.</NotFound>

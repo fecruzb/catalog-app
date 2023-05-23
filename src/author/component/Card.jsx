@@ -11,7 +11,7 @@ const AuthorCard = ({ author }) => (
       <Grid item>
         <Avatar
           sx={{ height: "128px", width: "128px" }}
-          src={`https://robohash.org/${author.name}?bgset=bg2`}
+          src={`data:image/png;base64,${author.photo}`}
         />
       </Grid>
       <Grid item xs>

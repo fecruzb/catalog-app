@@ -15,7 +15,7 @@ const BookItem = ({ book, onDelete, onEdit, onView }) => (
           <Avatar
             variant="square"
             sx={{ width: "128px", height: "128px" }}
-            src={`https://robohash.org/${book.title}?set=set4&bgset=bg1`}
+            src={`data:image/png;base64,${book.cover}`}
           />
         </ButtonBase>
       </Grid>

@@ -54,11 +54,18 @@ const AuthorView = () => {
             {author.name}
           </Title>
           <Card author={author} />
+          <Box mt={1} mb={1}>
+            <Typography>{author.description}</Typography>
+          </Box>
 
-          <Typography variant="h6">Books</Typography>
-          <Divider sx={{ mb: 1 }} />
+          {author?.books?.length > 0 && (
+            <>
+              <Typography variant="h6">Books</Typography>
+              <Divider sx={{ mb: 1 }} />
 
-          <List books={author?.books || []} actions={false} />
+              <List books={author?.books || []} actions={false} />
+            </>
+          )}
         </>
       ) : (
         <NotFound>Author was not found.</NotFound>

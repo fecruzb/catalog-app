@@ -14,7 +14,7 @@ const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
         <ButtonBase onClick={onView}>
           <Avatar
             sx={{ height: "64px", width: "64px" }}
-            src={`https://robohash.org/${author.name}?bgset=bg2`}
+            src={`data:image/png;base64,${author.photo}`}
           />
         </ButtonBase>
       </Grid>
