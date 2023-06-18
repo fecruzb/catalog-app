@@ -57,7 +57,7 @@ const BookView = () => {
           <Card book={book} />
           <Box mt={2} mb={2}>
             <Typography>
-              <Resume prompt={`short resume about the book ${book.title}`} />
+              <Typography>{book.resume}</Typography>
             </Typography>
           </Box>
         </>

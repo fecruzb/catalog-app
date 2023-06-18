@@ -30,7 +30,7 @@ const BookEdit = () => {
 
   const handleSubmit = async (value) => {
     const { data: book } = await BookAPI.update(value)
-    navigate(`/book`)
+    navigate(`/book/${book.id}`)
     return book
   }
 

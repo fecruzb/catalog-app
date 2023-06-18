@@ -63,9 +63,7 @@ const AuthorView = () => {
           <Typography variant="h6">Biography</Typography>
           <Divider sx={{ mb: 1 }} />
           <Box mt={1} mb={1}>
-            <Typography>
-              <Biography prompt={`short biography about ${author.name}`} />
-            </Typography>
+            <Typography>{author.biography}</Typography>
           </Box>
           {author?.books?.length > 0 && (
             <>

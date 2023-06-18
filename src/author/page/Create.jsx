@@ -12,7 +12,7 @@ const AuthorCreate = () => {
 
   const handleSubmit = async (value) => {
     const { data: author } = await AuthorAPI.create(value)
-    navigate(`/author`)
+    navigate(`/author/${author.id}`)
     return author
   }
 
