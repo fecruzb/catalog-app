@@ -1,7 +1,7 @@
 import axios from "axios"
 
 /* Base URL */
-const baseURL = "http://localhost:4000"
+const baseURL = API_URL
 
 /**
  * [GET] /books

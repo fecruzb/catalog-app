@@ -7,6 +7,8 @@ import { Link, Loading, NotFound, Title } from "@/app/component"
 import * as BookAPI from "@/book/api"
 import { Card } from "@/book/component"
 
+import Resume from "../component/Resume"
+
 const BookView = () => {
   const navigate = useNavigate()
   const { id } = useParams()
@@ -54,7 +56,9 @@ const BookView = () => {
           </Title>
           <Card book={book} />
           <Box mt={2} mb={2}>
-            <Typography>{book.description}</Typography>
+            <Typography>
+              <Resume prompt={`short resume about the book ${book.title}`} />
+            </Typography>
           </Box>
         </>
       ) : (

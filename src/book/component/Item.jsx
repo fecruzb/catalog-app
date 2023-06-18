@@ -7,35 +7,35 @@ import EditIcon from "@mui/icons-material/Edit"
 
 import { Link } from "@/app/component"
 
-const BookItem = ({ book, onDelete, onEdit, onView }) => (
+import Cover from "./Cover"
+
+const BookItem = ({ book, onDelete, onEdit, onView, dense = false }) => (
   <Box p={2}>
     <Grid container spacing={2} alignItems="center" direction="row">
       <Grid item>
         <ButtonBase onClick={onView}>
-          <Avatar
-            variant="square"
-            sx={{ width: "128px", height: "128px" }}
-            src={`data:image/png;base64,${book.cover}`}
-          />
+          <Cover variant="square" sx={{ width: "128px", height: "128px" }} slug={book.slug} />
         </ButtonBase>
       </Grid>
-      <Grid item xs>
-        <Link to={`/book/${book.id}`}>
-          <Typography variant="h6" color="secondary">
-            {book.title}
-          </Typography>
-        </Link>
-        {book?.author && (
-          <Link to={`/author/${book.author.id}`} color="primary">
-            <Typography color="primary" variant="subtitle1">
-              {book.author?.name}
+      {!dense && (
+        <Grid item xs>
+          <Link to={`/book/${book.id}`}>
+            <Typography variant="h6" color="secondary">
+              {book.title}
             </Typography>
           </Link>
-        )}
+          {book?.author && (
+            <Link to={`/author/${book.author.id}`} color="primary">
+              <Typography color="primary" variant="subtitle1">
+                {book.author?.name}
+              </Typography>
+            </Link>
+          )}
 
-        <Typography>Year: {book.year}</Typography>
-        <Typography>ISBN: {book.ISBN}</Typography>
-      </Grid>
+          <Typography>Year: {book.year}</Typography>
+          <Typography>ISBN: {book.ISBN}</Typography>
+        </Grid>
+      )}
       {(onEdit || onDelete) && (
         <Grid item>
           <Stack direction="row" spacing={1}>

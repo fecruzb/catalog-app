@@ -8,6 +8,8 @@ import * as AuthorAPI from "@/author/api"
 import { Card } from "@/author/component"
 import { List } from "@/book/component"
 
+import Biography from "../component/Biography"
+
 const AuthorView = () => {
   const navigate = useNavigate()
   const { id } = useParams()
@@ -30,6 +32,10 @@ const AuthorView = () => {
   }, [id])
 
   const handleEdit = () => navigate(`/author/${author.id}/edit`)
+
+  const handleViewBook = async (book) => {
+    navigate(`/book/${book.id}`)
+  }
 
   return (
     <Box>
@@ -54,16 +60,18 @@ const AuthorView = () => {
             {author.name}
           </Title>
           <Card author={author} />
+          <Typography variant="h6">Biography</Typography>
+          <Divider sx={{ mb: 1 }} />
           <Box mt={1} mb={1}>
-            <Typography>{author.description}</Typography>
+            <Typography>
+              <Biography prompt={`short biography about ${author.name}`} />
+            </Typography>
           </Box>
-
           {author?.books?.length > 0 && (
             <>
               <Typography variant="h6">Books</Typography>
               <Divider sx={{ mb: 1 }} />
-
-              <List books={author?.books || []} actions={false} />
+              <List onView={handleViewBook} dense books={author?.books || []} actions={false} />
             </>
           )}
         </>

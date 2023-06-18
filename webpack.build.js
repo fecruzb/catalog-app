@@ -1,6 +1,7 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const webpack = require("webpack")
 
 const sourceDir = path.join(__dirname, "./src")
 
@@ -16,6 +17,9 @@ module.exports = {
   },
   context: sourceDir,
   plugins: [
+    new webpack.DefinePlugin({
+      API_URL: "https://catalog-api.cyclic.app",
+    }),
     new HtmlWebpackPlugin({
       publicPath: "/",
       template: "index.html",

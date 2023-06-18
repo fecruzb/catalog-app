@@ -1,8 +1,9 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 
-const sourceDir = path.join(__dirname, "./src")
+const webpack = require("webpack")
 
+const sourceDir = path.join(__dirname, "./src")
 module.exports = {
   devServer: {
     hot: true,
@@ -23,6 +24,9 @@ module.exports = {
   devtool: "source-map",
   context: sourceDir,
   plugins: [
+    new webpack.DefinePlugin({
+      API_URL: "http://localhost:4000",
+    }),
     new HtmlWebpackPlugin({
       publicPath: "/",
       template: "index.html",

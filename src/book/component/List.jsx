@@ -5,17 +5,17 @@ import { Divider, Grid } from "@mui/material"
 
 import Item from "./Item"
 
-const BookList = ({ books, onDelete, onEdit, onView, actions }) => (
+const BookList = ({ books, onDelete, onEdit, onView, actions, dense = false }) => (
   <Grid container spacing={2}>
     {books.map((book) => (
-      <Grid item key={book.id} xs={6}>
+      <Grid item key={book.id} xs={dense ? 0 : 6}>
         <Item
+          dense={dense}
           book={book}
           onEdit={actions ? () => onEdit(book) : false}
           onDelete={actions ? () => onDelete(book) : false}
-          onView={actions ? () => onView(book) : false}
+          onView={() => onView(book)}
         />
-        <Divider sx={{ mt: 1 }} />
       </Grid>
     ))}
   </Grid>

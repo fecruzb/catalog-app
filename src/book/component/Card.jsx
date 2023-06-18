@@ -1,19 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import { Avatar, Box, Grid, Typography } from "@mui/material"
+import { Box, Grid, Typography } from "@mui/material"
 
 import { Link } from "@/app/component"
+
+import Cover from "./Cover"
 
 const BookCard = ({ book }) => (
   <Box p={2}>
     <Grid container spacing={2} alignItems="center">
       <Grid item>
-        <Avatar
-          variant="square"
-          sx={{ height: "128px", width: "128px" }}
-          src={`data:image/png;base64,${book.cover}`}
-        />
+        <Cover slug={book.slug} sx={{ height: "128px", width: "128px" }} />
       </Grid>
       <Grid item xs>
         <Typography variant="h6" color="primary">

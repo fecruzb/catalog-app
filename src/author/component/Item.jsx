@@ -6,16 +6,14 @@ import { Avatar, Box, Button, ButtonBase, Grid, Stack, Typography } from "@mui/m
 import { Link } from "@/app/component"
 
 import Flag from "./Flag"
+import Photo from "./Photo"
 
 const AuthorItem = ({ author, onEdit, onDelete, onView }) => (
   <Box>
     <Grid container spacing={2} alignItems="center">
       <Grid item>
         <ButtonBase onClick={onView}>
-          <Avatar
-            sx={{ height: "64px", width: "64px" }}
-            src={`data:image/png;base64,${author.photo}`}
-          />
+          <Photo sx={{ height: "64px", width: "64px" }} slug={author.slug} />
         </ButtonBase>
       </Grid>
       <Grid item xs>

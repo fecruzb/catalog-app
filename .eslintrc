@@ -46,7 +46,8 @@
   "globals": {
     "PropTypes": false,
     "React": false,
-    "jest/globals": true
+    "jest/globals": true,
+    "API_URL": true
   },
   "overrides": [
     {
