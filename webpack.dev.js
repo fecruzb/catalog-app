@@ -25,7 +25,7 @@ module.exports = {
   context: sourceDir,
   plugins: [
     new webpack.DefinePlugin({
-      API_URL: "http://localhost:4000",
+      API_URL: JSON.stringify("https://catalog-api.cyclic.app"),
     }),
     new HtmlWebpackPlugin({
       publicPath: "/",
