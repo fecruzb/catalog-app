@@ -17,7 +17,7 @@ const Photo = ({ slug, styles, sx }) => {
 
   const currentStyle = styles[currentStyleIndex]
 
-  return <Avatar sx={sx} src={`http://localhost:4000/public/author/${currentStyle}/${slug}.png`} />
+  return <Avatar sx={sx} src={`${API_URL}/public/author/${currentStyle}/${slug}.png`} />
 }
 
 Photo.defaultProps = {
