@@ -8,7 +8,7 @@ const Photo = ({ slug, styles, sx }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStyleIndex((prevIndex) => (prevIndex + 1) % styles.length)
-    }, 5000)
+    }, 3000)
 
     return () => {
       clearInterval(interval)
@@ -21,7 +21,7 @@ const Photo = ({ slug, styles, sx }) => {
 }
 
 Photo.defaultProps = {
-  styles: ["default", "line"],
+  styles: ["default", "realistic", "anime"],
 }
 
 export default Photo
