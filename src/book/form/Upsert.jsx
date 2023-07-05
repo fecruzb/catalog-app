@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 
 import * as yup from "yup"
-import { Field, Form, Formik } from "formik"
 
-import { Button, Grid, MenuItem, Stack, TextField } from "@mui/material"
+import { Button, Grid, Stack } from "@mui/material"
+
+import { MyAutoComplete, MyForm, MySubmit, MyTextField } from "src/forms"
 
 import * as AuthorAPI from "@/author/api"
+import Photo from "@/author/component/Photo"
 
 const validationSchema = yup.object().shape({
-  title: yup.string().required("Title is required"),
+  title: yup.string().min(5).required("Title is required"),
   author_id: yup.number().required("Author is required"),
 })
 
@@ -26,56 +28,31 @@ const UpsertBookForm = ({ initialValues, onSubmit, onCancel }) => {
   }, [])
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-      {({ errors, touched, isValid, isSubmitting, dirty }) => (
-        <Form>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Field
-                name="title"
-                as={TextField}
-                label="Title"
-                fullWidth
-                error={touched.title && !!errors.title}
-                helperText={touched.title && errors.title}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Field
-                name="author_id"
-                as={TextField}
-                label="Author"
-                fullWidth
-                select
-                error={touched.author_id && !!errors.author_id}
-                helperText={touched.author_id && errors.author_id}
-              >
-                {authors.map((author) => (
-                  <MenuItem key={author.id} value={author.id}>
-                    {author.name}
-                  </MenuItem>
-                ))}
-              </Field>
-            </Grid>
-            <Grid item xs={12}>
-              <Stack direction="row" spacing={2} justifyContent="end">
-                <Button variant="outlined" color="inherit" onClick={onCancel}>
-                  Back
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  disabled={!isValid || isSubmitting || !dirty}
-                >
-                  Save
-                </Button>
-              </Stack>
-            </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+    <MyForm initialValues={initialValues} validation={validationSchema} onSubmit={onSubmit}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <MyTextField name="title" label="Title" />
+        </Grid>
+        <Grid item xs={12}>
+          <MyAutoComplete
+            icon={({ option }) => <Photo slug={option.slug} sx={{ mr: 1 }} />}
+            name="author_id"
+            valueAccessor="id"
+            labelAccessor="name"
+            options={authors}
+            label="Author"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Stack direction="row" spacing={2} justifyContent="end">
+            <Button variant="outlined" color="inherit" onClick={onCancel}>
+              Back
+            </Button>
+            <MySubmit type="submit" variant="contained" color="primary" />
+          </Stack>
+        </Grid>
+      </Grid>
+    </MyForm>
   )
 }
 
