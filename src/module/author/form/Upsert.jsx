@@ -26,12 +26,15 @@ const UpsertAuthorForm = ({ initialValues, onSubmit, onCancel }) => {
       <Stack direction="column" spacing={2}>
         <TextField name="name" label="Name" />
         {initialValues?.id && (
-          <AutoComplete
-            icon={({ option }) => <Flag code={option.value} />}
-            name="country"
-            options={countries}
-            label="Country"
-          />
+          <>
+            <AutoComplete
+              icon={({ option }) => <Flag code={option.value} />}
+              name="country"
+              options={countries}
+              label="Country"
+            />
+            <TextField name="biography" label="Biography" multiline minRows={5} />
+          </>
         )}
         <Stack direction="row" spacing={2} justifyContent="end">
           <Button variant="outlined" color="inherit" onClick={onCancel}>

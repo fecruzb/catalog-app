@@ -29,6 +29,14 @@ const UpsertBookForm = ({ initialValues, onSubmit, onCancel }) => (
             options={authors}
             label="Author"
           />
+          {initialValues?.id && (
+            <>
+              <TextField name="year" label="Year" />
+              <TextField name="ISBN" label="ISBN" />
+
+              <TextField name="resume" label="Resume" multiline minRows={5} />
+            </>
+          )}
           <Stack direction="row" spacing={2} justifyContent="end">
             <Button variant="outlined" color="inherit" onClick={onCancel}>
               Back
@@ -50,6 +58,7 @@ UpsertBookForm.defaultProps = {
 
 UpsertBookForm.propTypes = {
   initialValues: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     author_id: PropTypes.number,
   }),
