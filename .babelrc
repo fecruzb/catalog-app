@@ -10,10 +10,11 @@
         "root": [ "./" ],
         "extensions": [ ".js", ".jsx" ],
         "alias": {
-          "@/app": "./src/app",
-          "@/book": "./src/book",
-          "@/author": "./src/author",
-          "@/home": "./src/home"
+          "@/app": "./src/module/app",
+          "@/book": "./src/module/book",
+          "@/author": "./src/module/author",
+          "@/home": "./src/module/home",
+          "@/auth": "./src/module/auth"
         }
       }
     ]

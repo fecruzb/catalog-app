@@ -6,16 +6,19 @@
         "module": "commonjs",
         "paths": {
             "@/app/*": [
-                "src/app/*"
+                "src/module/app/*"
             ],
             "@/author/*": [
-                "src/author/*"
+                "src/module/author/*"
             ],
             "@/book/*": [
-                "src/book/*"
+                "src/module/book/*"
             ],
             "@/home/*": [
-                "src/home/*"
+                "src/module/home/*"
+            ],
+             "@/auth/*": [
+                "src/module/auth/*"
             ],
         }
     },
